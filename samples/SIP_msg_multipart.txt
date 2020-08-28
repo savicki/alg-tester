@@ -1,0 +1,33 @@
+REGISTER sip:10.0.3.225 SIP/2.0
+Via: SIP/2.0/TCP 10.0.116.17:51638;branch=z9hG4bKc41ffeb5f43ead2fc13439af6efea419;rport
+Call-ID: 73bc9bedb5cb71058fb0717e92af4c38
+CSeq: 20515 REGISTER
+Contact: <sip:9bde787d-ae6f-bf51-9e31-6fe3cc692e61@10.0.116.17:51638;transport=tcp>;+sip.instance="<urn:uuid:00000000-0000-0000-0000-b026800898aa>";+u.sip!model.ccm.cisco.com="36251";audio=TRUE;video=TRUE;mobility="fixed";duplex="full";description="TANDBERG-SIP";sip.cisco.multistream
+From: <sip:5874@10.0.3.225>;tag=ce4c8ce6d711298d
+To: <sip:5874@10.0.3.225>
+Max-Forwards: 70
+Route: <sip:10.0.3.225;lr>
+Allow: INVITE,ACK,CANCEL,BYE,UPDATE,INFO,OPTIONS,REFER,NOTIFY
+User-Agent: TANDBERG/529 (ce9.1.4.3ae3106) Cisco-RoomKit
+Expires: 3600
+Supported: replaces,100rel,timer,gruu,path,outbound,X-cisco-serviceuri,X-cisco-callinfo,X-cisco-service-control,X-cisco-sis-7.1.1,norefersub,extended-refer,sdp-anat
+Reason: SIP ;cause=200;text="cisco-alarm:25 Name=SEPB026800898AA ActiveLoad=ce-9.1.4-3ae3106-2017-08-30 Last=Device-Initiated-Reset"
+Content-Type: multipart/mixed; boundary=uniqueBoundary
+Content-Length: 373
+
+--uniqueBoundary
+Content-Type: application/x-cisco-remotecc-request+xml
+Content-Disposition: session;handling=optional
+
+<?xml version="1.0" encoding="UTF-8"?>
+<x-cisco-remotecc-request>
+<optionsind>
+<joinreq/>
+<x-cisco-number/>
+<ix/>
+<rpid-orig-called/>
+<dialog usage="shared line"><unot/><sub/></dialog>
+</optionsind>
+</x-cisco-remotecc-request>
+
+--uniqueBoundary--
