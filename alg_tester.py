@@ -121,7 +121,7 @@ if args.r != '':
 # print "-parse_msg: '%s'" % args.parse_msg
 
 
-filenames = sorted([f for f in glob.glob("./" + args.fmask)]) 
+filenames = sorted([f for f in glob.glob("./samples/" + args.fmask)]) 
 
 f_index = 0
 while f_index < args.fskip:

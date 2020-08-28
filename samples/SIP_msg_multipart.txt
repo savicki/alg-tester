@@ -1,12 +1,12 @@
-REGISTER sip:10.0.3.225 SIP/2.0
-Via: SIP/2.0/TCP 10.0.116.17:51638;branch=z9hG4bKc41ffeb5f43ead2fc13439af6efea419;rport
+REGISTER sip:[remote_ip] SIP/2.0
+Via: SIP/2.0/TCP [local_ip].17:51638;branch=z9hG4bKc41ffeb5f43ead2fc13439af6efea419;rport
 Call-ID: 73bc9bedb5cb71058fb0717e92af4c38
 CSeq: 20515 REGISTER
-Contact: <sip:9bde787d-ae6f-bf51-9e31-6fe3cc692e61@10.0.116.17:51638;transport=tcp>;+sip.instance="<urn:uuid:00000000-0000-0000-0000-b026800898aa>";+u.sip!model.ccm.cisco.com="36251";audio=TRUE;video=TRUE;mobility="fixed";duplex="full";description="TANDBERG-SIP";sip.cisco.multistream
-From: <sip:5874@10.0.3.225>;tag=ce4c8ce6d711298d
-To: <sip:5874@10.0.3.225>
+Contact: <sip:9bde787d-ae6f-bf51-9e31-6fe3cc692e61@[local_ip].17:51638;transport=tcp>;+sip.instance="<urn:uuid:00000000-0000-0000-0000-b026800898aa>";+u.sip!model.ccm.cisco.com="36251";audio=TRUE;video=TRUE;mobility="fixed";duplex="full";description="TANDBERG-SIP";sip.cisco.multistream
+From: <sip:5874@[remote_ip]>;tag=ce4c8ce6d711298d
+To: <sip:5874@[remote_ip]>
 Max-Forwards: 70
-Route: <sip:10.0.3.225;lr>
+Route: <sip:[remote_ip];lr>
 Allow: INVITE,ACK,CANCEL,BYE,UPDATE,INFO,OPTIONS,REFER,NOTIFY
 User-Agent: TANDBERG/529 (ce9.1.4.3ae3106) Cisco-RoomKit
 Expires: 3600

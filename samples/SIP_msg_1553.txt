@@ -1,34 +1,34 @@
-INVITE sip:service@11.0.0.7:5060 SIP/2.0
-Via: SIP/2.0/TCP 172.16.0.4:5060;branch=z9hG4bK-23412-300-0
-Via: SIP/2.0/TCP 172.16.0.4:5060;branch=z9hG4bK-23412-300-0
-Via: SIP/2.0/TCP 172.16.0.4:5060;branch=z9hG4bK-23412-300-0
-Via: SIP/2.0/TCP 172.16.0.4:5060;branch=z9hG4bK-23412-300-0
-Via: SIP/2.0/TCP 172.16.0.4:5060;branch=z9hG4bK-23412-300-0
-Via: SIP/2.0/TCP 172.16.0.4:5060;branch=z9hG4bK-23412-300-0
-From: sipp <sip:sipp@172.16.0.4:5060>;tag=23412SIPpTag00300
-To: service <sip:service@11.0.0.7:5060>
-Call-ID: 300-23412@172.16.0.4
+INVITE sip:service@[remote_ip]:5060 SIP/2.0
+Via: SIP/2.0/TCP [local_ip]:5060;branch=z9hG4bK-23412-300-0
+Via: SIP/2.0/TCP [local_ip]:5060;branch=z9hG4bK-23412-300-0
+Via: SIP/2.0/TCP [local_ip]:5060;branch=z9hG4bK-23412-300-0
+Via: SIP/2.0/TCP [local_ip]:5060;branch=z9hG4bK-23412-300-0
+Via: SIP/2.0/TCP [local_ip]:5060;branch=z9hG4bK-23412-300-0
+Via: SIP/2.0/TCP [local_ip]:5060;branch=z9hG4bK-23412-300-0
+From: sipp <sip:sipp@[local_ip]:5060>;tag=23412SIPpTag00300
+To: service <sip:service@[remote_ip]:5060>
+Call-ID: 300-23412@[local_ip]
 CSeq: 1 INVITE
-Contact: sip:sipp@172.16.0.4:5060
+Contact: sip:sipp@[local_ip]:5060
 Max-Forwards: 70
 Subject: Performance Test
 Content-Type: application/sdp
 Content-Length:   131
 
 v=0
-o=user1 53655765 2353687637 IN IP4 172.16.0.4
+o=user1 53655765 2353687637 IN IP4 [local_ip]
 s=-
-c=IN IP4 172.16.0.4
+c=IN IP4 [local_ip]
 t=0 0
 m=audio 6000 RTP/AVP 0
 a=rtpmap:0 PCMU/8000
-ACK sip:service@11.0.0.7:5060 SIP/2.0
-Via: SIP/2.0/TCP 172.16.0.4:5060;branch=z9hG4bK-23412-1-5
-From: sipp <sip:sipp@172.16.0.4:5060>;tag=23412SIPpTag001
-To: service <sip:service@11.0.0.7:5060>;tag=24289SIPpTag011
-Call-ID: 1-23412@172.16.0.4
+ACK sip:service@[remote_ip]:5060 SIP/2.0
+Via: SIP/2.0/TCP [local_ip]:5060;branch=z9hG4bK-23412-1-5
+From: sipp <sip:sipp@[local_ip]:5060>;tag=23412SIPpTag001
+To: service <sip:service@[remote_ip]:5060>;tag=24289SIPpTag011
+Call-ID: 1-23412@[local_ip]
 CSeq: 1 ACK
-Contact: sip:sipp@172.16.0.4:5060
+Contact: sip:sipp@[local_ip]:5060
 Max-Forwards: 70
 Subject: Performance Test 2
 Content-Length: 0
