@@ -97,10 +97,10 @@ parser.add_argument("-dst_ip", help="destin IP", type=str, required=True)
 parser.add_argument("-dst_port", help="destin port", type=int, default=TCP_PORT)
 parser.add_argument("-fskip", help="num of filenames to skip", type=int, default=0)
 parser.add_argument("-fcount", help="limit of filenames", type=int, required=True)
+parser.add_argument("-delay", help="delay in seconds between files, float value", type=float, required=True)
 parser.add_argument("-fmask", help="mask of filename", type=str, required=True)
 parser.add_argument("-r", help="replace pattern, e.g. '-r search/replace search2/replace2'", type=str, nargs="+", default='')
 parser.add_argument("-parse_msg", help="don't update 'Content-Length:' field", type=str2bool, default=True)
-# iTODO: delay
 
 args = parser.parse_args()
 
@@ -109,12 +109,12 @@ if args.fcount > 1:
      args.parse_msg = False
 
 if args.r != '':
-     for ind, repl in enumerate(args.r):
-          m = re.match(r"([\w\W]+?)/([\w\W]+)", repl)
+     for ind, arg in enumerate(args.r):
+          m = re.match(r"([\w\W]+?)/([\w\W]+)", arg)
           if m != None:
                args.r[ind] = (m.group(1), m.group(2))
           else:
-               print 'wrong replace argument \'%s\', it must match patter \'search_word/replace_word\'' % repl
+               print 'wrong replace argument \'%s\', it must match patter \'search_word/replace_word\'' % arg
 
 # print "args.fmask: '%s'" % args.fmask
 # print "-r:'%s'" % args.r
@@ -149,15 +149,19 @@ while f_index < f_limit:
 
           sent_bytes = s.send(f_content.encode('ascii'))
 
+          recv_buffer = s.recv(4096)
+
           # e.g. "[2] 'tomsk_7.txt' read 460, write 482, sent 482 bytes"
           print "[%s] '%s' read %s, write %s, sent %s bytes" % (f_index, filename, orig_len, len(f_content), sent_bytes)
           
           f_index = f_index + 1
 
+          if args.delay:
+               sleep(args.delay)
+
           if f_index == f_limit:
                print "File limit %d reached, stop" % f_limit
                break
 
-# sleep(0.5)
-s.recv(10000)
+sleep(3600)
 s.close()
