@@ -146,6 +146,7 @@ while f_index < f_limit:
      for filename in filenames:
           f = open(filename, mode='r') 
           f_content = f.read()
+          f.close()
 
           orig_len = len(f_content)
 
