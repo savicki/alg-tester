@@ -97,7 +97,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-dst_ip", help="destin IP", type=str, required=True)
 parser.add_argument("-dst_port", help="destin port", type=int, default=TCP_PORT)
 parser.add_argument("-fskip", help="num of filenames to skip", type=int, default=0)
-parser.add_argument("-fcount", help="limit of filenames", type=int, required=True)
+parser.add_argument("-fcount", help="limit of filenames", type=int, required=False, default=0)
 parser.add_argument("-delay", help="delay in seconds between files, float value", type=float, required=True)
 parser.add_argument("-fmask", help="mask of filename", type=str, required=True)
 parser.add_argument("-r", help="replace pattern, e.g. '-r search/replace search2/replace2'", type=str, nargs="+", default='')
@@ -106,8 +106,8 @@ parser.add_argument("-parse_msg", help="don't update 'Content-Length:' field", t
 args = parser.parse_args()
 
 
-if args.fcount > 1:
-     args.parse_msg = False
+#if args.fcount > 1:
+#     args.parse_msg = False
 
 if args.r != '':
      for ind, arg in enumerate(args.r):
@@ -135,12 +135,12 @@ while f_index < args.fskip:
 if args.fskip:
      print "skipped first %s files" % args.fskip
 
+f_index = 0
+f_limit = 2**31 if args.fcount == 0 else args.fcount
+
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
 s.connect((args.dst_ip, args.dst_port))
-
-f_index = 0
-f_limit = args.fcount
 
 while f_index < f_limit:
      for filename in filenames:
