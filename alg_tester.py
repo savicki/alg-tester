@@ -4,6 +4,7 @@ import glob
 import argparse
 import socket
 import re
+import sys
 from time import sleep
 
 TCP_PORT = 5060
@@ -121,7 +122,10 @@ if args.r != '':
 # print "-parse_msg: '%s'" % args.parse_msg
 
 
-filenames = sorted([f for f in glob.glob("./samples/" + args.fmask)]) 
+filenames = sorted([f for f in glob.glob(args.fmask)]) 
+
+if len(filenames) == 0:
+  sys.exit('error: no matched files')
 
 f_index = 0
 while f_index < args.fskip:

@@ -1,0 +1,38 @@
+ipp@172.16.0.4:5060
+Max-Forwards: 70
+Subject: Performance Test
+Content-Length: 0
+
+ACK sip:service@11.0.0.7:5060 SIP/2.0
+Via: SIP/2.0/TCP 172.16.0.4:5060;branch=z9hG4bK-23412-3-5
+From: sipp <sip:sipp@172.16.0.4:5060>;tag=23412SIPpTag003
+To: service <sip:service@11.0.0.7:5060>;tag=24289SIPpTag013
+Call-ID: 3-23412@172.16.0.4
+CSeq: 1 ACK
+Contact: sip:sipp@172.16.0.4:5060
+Max-Forwards: 70
+Subject: Performance Test
+Content-Length: 0
+
+ACK sip:service@11.0.0.7:5060 SIP/2.0
+Via: SIP/2.0/TCP 172.16.0.4:5060;branch=z9hG4bK-23412-4-5
+From: sipp <sip:sipp@172.16.0.4:5060>;tag=23412SIPpTag004
+To: service <sip:service@11.0.0.7:5060>;tag=24289SIPpTag014
+Call-ID: 4-23412@172.16.0.4
+CSeq: 1 ACK
+Contact: sip:sipp@172.16.0.4:5060
+Max-Forwards: 70
+Subject: Performance Test
+Content-Length: 0
+
+BYE sip:service@11.0.0.7:5060 SIP/2.0
+Via: SIP/2.0/TCP 172.16.0.4:5060;branch=z9hG4bK-23412-1-7
+From: sipp <sip:sipp@172.16.0.4:5060>;tag=23412SIPpTag001
+To: service <sip:service@11.0.0.7:5060>;tag=24289SIPpTag011
+Call-ID: 1-23412@172.16.0.4
+CSeq: 2 BYE
+Contact: sip:sipp@172.16.0.4:5060
+Max-Forwards: 70
+Subject: Performance Test
+Content-Length: 0
+
