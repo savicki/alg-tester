@@ -1,5 +1,5 @@
-send multiple files, one by one (1_sip.txt, 2_sip.txt, etc):
+# send multiple files, one by one (1_sip.txt, 2_sip.txt, etc)
 python alg_tester.py -dst_ip 11.0.0.7 -dst_port 5060 -fcount 3 -fmask "samples_multiple_files/*_sip.txt" -r [local_ip]/172.16.0.4 [remote_ip]/11.0.0.7 -delay 1
 
-send single file:
+# send single file
 python alg_tester.py -dst_ip 11.0.0.7 -dst_port 5060 -fcount 1 -fmask "samples/SIP_msg_1553.txt" -r [local_ip]/172.16.0.4 [remote_ip]/11.0.0.7 -delay 1
