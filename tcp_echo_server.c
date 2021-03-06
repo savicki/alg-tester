@@ -99,7 +99,8 @@ int main( int argc, char *argv[] )
 
      do
      {
-          char *test2;
+          int total_read_bytes = 0, total_write_bytes = 0;
+
           int clilen = sizeof(cli_addr);
           newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
           if (newsockfd < 0) {
@@ -121,19 +122,27 @@ int main( int argc, char *argv[] )
                          buffer[read_bytes] = '\0';
 
                          printf("recv %d bytes: '" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "' \n", read_bytes, buffer);
+
+                         total_read_bytes += read_bytes;
                     }
 
                     if (!no_reply) {
                          write_bytes = send(newsockfd, buffer, read_bytes, 0);
 
                          printf("send back %d bytes \n", write_bytes);
+
+                         if (write_bytes > 0) {
+                              total_write_bytes += write_bytes;
+                         }
                     }
                
                } 
                while(read_bytes);
           }
 
-          printf("disconnected from %s:%u \n", inet_ntoa(cli_addr.sin_addr), ntohs(cli_addr.sin_port));
+          printf("disconnected from %s:%u, total_recv: %d, total_sent: %d \n", 
+               inet_ntoa(cli_addr.sin_addr), ntohs(cli_addr.sin_port),
+               total_read_bytes, total_write_bytes);
 
           close(newsockfd);
 
