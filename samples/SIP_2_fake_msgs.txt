@@ -1,0 +1,7 @@
+act>
+</bulkregisterreq>
+</x-cisco-remotecc-request>
+
+--uniqueBoundary
+Content-Type: application/x-cisco-remotecc-request+xml
+Content-Disposition: session;handling=optional
