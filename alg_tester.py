@@ -7,13 +7,30 @@ import re
 import sys
 from time import sleep
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKRED = '\033[31m'
+    OKGREEN = '\033[32m'
+    OKYELLOW = '\033[33m'
+    OKMAGENTA = '\033[35m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
 TCP_PORT = 5060
 
 
 RNRN = '\r\n\r\n'
+
 # search \r\n\r\n
 # search Content-Length
 # locate end of msg
+# return array of SIP messages
 def do_parse_msgs(content):
      msgs = []
      st = 0
@@ -38,7 +55,7 @@ def do_parse_msgs(content):
                msg = content[st:end]
                msgs.append(msg)
 
-               print '"%s"' % msg
+               print((bcolors.OKMAGENTA + '\'%s\'' + bcolors.ENDC) % msg)
 
                st = end
           else:
@@ -48,7 +65,7 @@ def do_parse_msgs(content):
 
 def do_edit_msg(msg, replace_arr, update_cl):
      for r in replace_arr:
-          print 'replace \'%s\' with \'%s\'' % (r[0], r[1])
+          print((bcolors.OKRED + 'replace \'%s\' with \'%s\'' + bcolors.ENDC) % (r[0], r[1]))
           msg = msg.replace(r[0], r[1])
 
      if update_cl: # @msg contains single SIP message
@@ -62,10 +79,12 @@ def do_edit_msg(msg, replace_arr, update_cl):
 
                msg = re.sub(r"(Content-Length:\W*)(\d+)", replace_content_len, msg)
 
-               print "=======\n'%s'=======" % msg
+               print((bcolors.OKMAGENTA + '\'%s\'' + bcolors.ENDC) % msg)
 
      return msg
 
+# parse message(s), then
+# edit each of message(s)
 def process_file(content, args):
 
      if args.parse_msg == False and len(args.r) == 0:
@@ -121,8 +140,15 @@ if args.r != '':
 # print "-r:'%s'" % args.r
 # print "-parse_msg: '%s'" % args.parse_msg
 
+# 'Internal_call__dir0__62067/VipNet_Internal_call__dir0__62067.pcap__1.txt'
+def pcap2txtmsg_filename(key):
+  # this regex for pcap2txtmsg.py output filenames
+  m = re.match('(?:[\w\W]+?)__(\d+).txt', key)
+  if m:
+    return int(m.group(1))
+  return key
 
-filenames = sorted([f for f in glob.glob(args.fmask)]) 
+filenames = sorted([f for f in glob.glob(args.fmask)], key=pcap2txtmsg_filename) 
 
 if len(filenames) == 0:
   sys.exit('error: no matched files')
@@ -140,11 +166,14 @@ f_limit = 2**31 if args.fcount == 0 else args.fcount
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+print('Connecting to %s:%s ...' % (args.dst_ip, args.dst_port))
 s.connect((args.dst_ip, args.dst_port))
+print('...connected.')
 
 while f_index < f_limit:
      for filename in filenames:
-          f = open(filename, mode='r') 
+          print((bcolors.OKGREEN + "[%s] processing '%s' file.." + bcolors.ENDC) % (f_index, filename))
+          f = open(filename, mode='r')
           f_content = f.read()
           f.close()
 
@@ -154,10 +183,14 @@ while f_index < f_limit:
 
           sent_bytes = s.send(f_content.encode('ascii'))
 
-          recv_buffer = s.recv(4096)
+          try:
+            s.settimeout(2.0)
+            recv_buffer = s.recv(4096)
+          except socket.timeout:
+            pass
 
           # e.g. "[2] 'tomsk_7.txt' read 460, write 482, sent 482 bytes"
-          print "[%s] '%s' read %s, write %s, sent %s bytes" % (f_index, filename, orig_len, len(f_content), sent_bytes)
+          print((bcolors.OKYELLOW + "[%s]  processed '%s' read %s, write %s, sent %s bytes" + bcolors.ENDC) % (f_index, filename, orig_len, len(f_content), sent_bytes))
           
           f_index = f_index + 1
 
