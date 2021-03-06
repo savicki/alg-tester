@@ -88,6 +88,7 @@ def do_edit_msg(msg, replace_arr, update_cl):
 def process_file(content, args):
 
      if args.parse_msg == False and len(args.r) == 0:
+          print((bcolors.OKMAGENTA + '\'%s\'' + bcolors.ENDC) % content)
           return content
 
      if args.parse_msg:
@@ -126,7 +127,7 @@ args = parser.parse_args()
 
 
 #if args.fcount > 1:
-#     args.parse_msg = False
+#args.parse_msg = False
 
 if args.r != '':
      for ind, arg in enumerate(args.r):
@@ -168,8 +169,9 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
 print('Connecting to %s:%s ...' % (args.dst_ip, args.dst_port))
 s.connect((args.dst_ip, args.dst_port))
-print('...connected.')
+print((bcolors.OKRED + 'Local %s:%s connected to %s:%s' + bcolors.OKRED) % (s.getsockname()[0], s.getsockname()[1], args.dst_ip, args.dst_port))
 
+total_sent_bytes = 0
 while f_index < f_limit:
      for filename in filenames:
           print((bcolors.OKGREEN + "[%s] processing '%s' file.." + bcolors.ENDC) % (f_index, filename))
@@ -182,6 +184,7 @@ while f_index < f_limit:
           f_content = process_file(f_content, args)
 
           sent_bytes = s.send(f_content.encode('ascii'))
+          total_sent_bytes = total_sent_bytes + sent_bytes
 
           try:
             s.settimeout(2.0)
@@ -198,7 +201,7 @@ while f_index < f_limit:
                sleep(args.delay)
 
           if f_index == f_limit:
-               print "File limit %d reached, stop" % f_limit
+               print "File limit %d reached, stop. Total sent bytes: %s" % (f_limit, total_sent_bytes)
                break
 
 sleep(3600)
