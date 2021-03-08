@@ -1,0 +1,20 @@
+Reset"
+Content-Type: multipart/mixed; boundary=uniqueBoundary
+Content-Length: 373
+
+--uniqueBoundary
+Content-Type: application/x-cisco-remotecc-request+xml
+Content-Disposition: session;handling=optional
+
+<?xml version="1.0" encoding="UTF-8"?>
+<x-cisco-remotecc-request>
+<optionsind>
+<joinreq/>
+<x-cisco-number/>
+<ix/>
+<rpid-orig-called/>
+<dialog usage="shared line"><unot/><sub/></dialog>
+</optionsind>
+</x-cisco-remotecc-request>
+
+--uniqueBoundary--

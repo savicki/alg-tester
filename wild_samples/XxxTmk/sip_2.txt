@@ -1,0 +1,10 @@
+.235>;tag=ce4c8ce6d711298d
+To: <sip:5874@10.1.10.235>
+Max-Forwards: 70
+Route: <sip:10.1.10.235;lr>
+Allow: INVITE,ACK,CANCEL,BYE,UPDATE,INFO,OPTIONS,REFER,NOTIFY
+User-Agent: TANDBERG/529 (ce9.1.4.3ae3106) Cisco-RoomKit
+Expires: 0
+Supported: replaces,100rel,timer,gruu,path,outbound,X-cisco-serviceuri,X-cisco-callinfo,X-cisco-service-control,X-cisco-sis-7.1.1,norefersub,extended-refer,sdp-anat
+Content-Length: 0
+

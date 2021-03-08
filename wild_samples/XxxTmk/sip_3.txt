@@ -1,0 +1,6 @@
+REFER sip:10.1.10.235 SIP/2.0
+Via: SIP/2.0/TCP 10.11.60.71:45667;branch=z9hG4bK5b8e2c7f2e9e956d920a20bef7d337a3;rport
+Call-ID: 73bc9bedb5cb71058fb0717e92af4c38
+CSeq: 20516 REFER
+Contact: <sip:9bde787d-ae6f-bf51-9e31-6fe3cc692e61@10.11.60.71:45667;transport=tcp>;+sip.instance="<urn:uuid:00000000-0000-0000-0000-b026800898aa>";+u.sip!model.ccm.cisco.com="36251";audio=TRUE;video=TRUE;mobility="fixed";duplex="full";description="TANDBERG-SIP";sip.cisco.multistream
+Refer-To: <urn:X-cisco-remotecc:token-registr
