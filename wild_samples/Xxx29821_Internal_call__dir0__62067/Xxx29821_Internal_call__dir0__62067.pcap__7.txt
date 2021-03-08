@@ -1,0 +1,42 @@
+co-mari-rate
+m=audio 19202 RTP/AVP 114 9 104 105 0 8 18 111 101
+c=IN IP4 10.129.1.160
+a=rtpmap:114 opus/48000/2
+a=rtpmap:9 G722/8000
+a=rtpmap:104 G7221/16000
+a=fmtp:104 bitrate=32000
+a=rtpmap:105 G7221/16000
+a=fmtp:105 bitrate=24000
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:18 G729/8000
+a=fmtp:18 annexb=no
+a=rtpmap:111 x-ulpfecuc/8000
+a=extmap:14/sendrecv http://protocols.cisco.com/timestamp#100us
+a=fmtp:111 max_esel=1420;m=8;max_n=32;FEC_ORDER=FEC_SRTP
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-16
+a=sendrecv
+m=video 31480 RTP/AVP 126 97 111
+c=IN IP4 10.129.1.160
+b=TIAS:4000000
+a=rtpmap:126 H264/90000
+a=fmtp:126 profile-level-id=42801F;packetization-mode=1;level-asymmetry-allowed=1;max-fs=3601;max-rcmd-nalu-size=32000
+a=imageattr:126 recv [x=[32:1:1280],y=[18:1:720],par=1.7778,q=1.00]
+a=content:main
+a=label:11
+a=rtpmap:97 H264/90000
+a=fmtp:97 profile-level-id=42801F;packetization-mode=0;level-asymmetry-allowed=1;max-fs=3601
+a=imageattr:97 recv [x=[32:1:1280],y=[18:1:720],par=1.7778,q=1.00]
+a=rtpmap:111 x-ulpfecuc/8000
+a=extmap:14/sendrecv http://protocols.cisco.com/timestamp#100us
+a=fmtp:111 max_esel=1420;m=8;max_n=32;FEC_ORDER=FEC_SRTP
+a=rtcp-fb:* ccm fir
+a=rtcp-fb:* ccm tmmbr
+a=rtcp-fb:* nack pli
+a=sendrecv
+m=video 31400 RTP/AVP 126 97 111
+c=IN IP4 10.129.1.160
+b=TIAS:4000000
+a=rtpmap:126 H264/90000
+a=fmtp:126 profile-level-id=42801F;packetization-mode=1;level-asymmetry

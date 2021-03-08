@@ -1,0 +1,37 @@
+REFER sip:msk1-cucm02.xxx.ru SIP/2.0
+Via: SIP/2.0/TCP 10.129.1.160:62067;branch=z9hG4bK00001f47
+From: "" <sip:6758@10.129.1.160>;tag=00090faa0001000800002f45-00005f22
+To: <sip:msk1-cucm02.xxx.ru>
+Call-ID: 00090faa-00010002-00003bc3-00001983@10.129.1.160
+Date: Fri, 05 Mar 2021 06:15:38 GMT
+CSeq: 1000 REFER
+User-Agent: Cisco-CSF
+Accept: application/x-cisco-remotecc-response+xml
+Expires: 3600
+Max-Forwards: 70
+Contact: <sip:49eca53c-df45-44db-aca8-0042bc69b269@10.129.1.160:62067;transport=tcp>;+u.sip!devicename.ccm.cisco.com="CSFMOSCHENKO"
+Require: norefersub
+Referred-By: "" <sip:6758@10.129.1.160>
+Refer-To: cid:00000e60@192.168.31.70
+Content-Id: <00000e60@192.168.31.70>
+Allow: ACK,BYE,CANCEL,INVITE,NOTIFY,OPTIONS,REFER,REGISTER,UPDATE,SUBSCRIBE
+Content-Type: multipart/mixed; boundary=uniqueBoundary
+Mime-Version: 1.0
+Content-Length: 787
+
+--uniqueBoundary
+Content-Type: application/x-cisco-remotecc-request+xml
+Content-Disposition: session;handling=required
+
+<?xml version="1.0" encoding="UTF-8"?>
+<x-cisco-remotecc-request>
+  <datapassthroughreq>
+    <applicationid>1234</applicationid>
+    <transactionid>0</transactionid>
+    <stationsequence>StationSequenceLast</stationsequence>
+    <displaypriority>0</displaypriority>
+    <appinstance>0</appinstance>
+    <routingid>0</routingid>
+    <confid>6621575</confid>
+  </datapassthroughreq>
+</x-cisco-remote

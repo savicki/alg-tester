@@ -1,0 +1,11 @@
+SIP/2.0 200 OK
+Via: SIP/2.0/TCP 10.213.118.77:5060;branch=z9hG4bK91b3fd1ba7b3e
+From: <sip:6758@10.213.118.77>;tag=703211086
+To: <sip:6758@10.129.1.160>;tag=00090faa0001000400001a9b-0000044b
+Call-ID: 28d66800-1ec19b7d-7a17cf-b54d840a@10.213.118.77
+Date: Fri, 05 Mar 2021 06:15:22 GMT
+CSeq: 101 REFER
+Server: Cisco-CSF
+Contact: <sip:49eca53c-df45-44db-aca8-0042bc69b269@10.129.1.160:62067;transport=tcp>;+u.sip!devicename.ccm.cisco.com="CSFMOSCHENKO"
+Content-Length: 0
+

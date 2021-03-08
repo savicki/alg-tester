@@ -1,0 +1,23 @@
+NOTIFY sip:6758@msk1-cucm02.xxx.ru SIP/2.0
+Via: SIP/2.0/TCP 10.129.1.160:62067;branch=z9hG4bK00002836
+To: "Somebody Somewhere" <sip:6758@msk1-cucm02.xxx.ru>
+From: "Somebody Somewhere" <sip:6758@msk1-cucm02.xxx.ru>;tag=00090faa00010009000015e8-00005756
+Call-ID: 000008ed-00006d51@10.129.1.160
+Date: Fri, 05 Mar 2021 06:15:50 GMT
+CSeq: 2 NOTIFY
+Event: dialog
+Subscription-State: active
+Max-Forwards: 70
+Contact: <sip:49eca53c-df45-44db-aca8-0042bc69b269@10.129.1.160:62067;transport=tcp>;+u.sip!devicename.ccm.cisco.com="CSFMOSCHENKO"
+Allow: ACK,BYE,CANCEL,INVITE,NOTIFY,OPTIONS,REFER,REGISTER,UPDATE,SUBSCRIBE
+Content-Length: 362
+Content-Type: application/dialog-info+xml
+Content-Disposition: session;handling=required
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<dialog-info xmlns:call="urn:x-cisco:parmams:xml:ns:dialog-info:dialog:callinfo-dialog" version="1" state="partial" entity="sip:6758@192.168.31.70">
+<dialog id="1" call-id="00090faa-00010004-000070a8-00002ab7@192.168.31.70" local-tag="00090faa00010006000050f5-00006924"><state>terminated</state></dialog>
+</dialog-info>
+BYE sip:7222116@10.213.118.77:5060;transport=tcp SIP/2.0
+Via: SIP/2.0/TCP 10.129.1.160:62067;branch=z9hG4bK00007efe
+From: "Somebody Somewhere" <sip:6758@msk1-cucm02.xxx.ru>;tag=00090faa00010006000050f5-00006924

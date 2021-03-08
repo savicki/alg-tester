@@ -1,0 +1,27 @@
+REGISTER sip:msk1-cucm02.xxx.ru SIP/2.0
+Via: SIP/2.0/TCP 10.129.1.160:62067;branch=z9hG4bK00004c82
+From: <sip:6758@msk1-cucm02.xxx.ru>;tag=00090faa0001000200005c11-00005152
+To: <sip:6758@msk1-cucm02.xxx.ru>
+Call-ID: 00090faa-00010003-00002fc3-000056b2@10.129.1.160
+Max-Forwards: 70
+Date: Fri, 05 Mar 2021 06:15:21 GMT
+CSeq: 101 REGISTER
+User-Agent: Cisco-CSF
+Contact: <sip:49eca53c-df45-44db-aca8-0042bc69b269@10.129.1.160:62067;transport=tcp>;+sip.instance="<urn:uuid:00000000-0000-0000-0000-00090faa0001>";+u.sip!devicename.ccm.cisco.com="CSFMOSCHENKO";+u.sip!model.ccm.cisco.com="503";video
+Supported: replaces,join,sdp-anat,norefersub,resource-priority,extended-refer,X-cisco-callinfo,X-cisco-serviceuri,X-cisco-escapecodes,X-cisco-service-control,X-cisco-srtp-fallback,X-cisco-monrec,X-cisco-config,X-cisco-sis-7.0.0,X-cisco-xsi-8.5.1,X-cisco-graceful-reg,X-cisco-duplicate-reg
+Reason: SIP;cause=200;text="cisco-alarm:25 Name=CSFMOSCHENKO ActiveLoad=Jabber_for_Windows-12.9.4.55060 InactiveLoad=Jabber_for_Windows-12.9.4.55060 Last=initialized"
+Expires: 3600
+Content-Type: multipart/mixed; boundary=uniqueBoundary
+Mime-Version: 1.0
+Content-Length: 1271
+
+--uniqueBoundary
+Content-Type: application/x-cisco-remotecc-request+xml
+Content-Disposition: session;handling=optional
+
+<?xml version="1.0" encoding="UTF-8"?>
+<x-cisco-remotecc-request>
+<bulkregisterreq>
+<contact all="true">
+<register></register>
+</cont

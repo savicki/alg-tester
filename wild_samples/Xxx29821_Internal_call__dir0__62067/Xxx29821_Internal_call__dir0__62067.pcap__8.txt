@@ -1,0 +1,32 @@
+-allowed=1;max-fs=4129;max-rcmd-nalu-size=32000
+a=content:slides
+a=label:12
+a=rtpmap:97 H264/90000
+a=fmtp:97 profile-level-id=42801F;packetization-mode=0;level-asymmetry-allowed=1;max-fs=4129
+a=rtpmap:111 x-ulpfecuc/8000
+a=extmap:14/sendrecv http://protocols.cisco.com/timestamp#100us
+a=fmtp:111 max_esel=1420;m=8;max_n=32;FEC_ORDER=FEC_SRTP
+a=rtcp-fb:* ccm fir
+a=rtcp-fb:* ccm tmmbr
+a=rtcp-fb:* nack pli
+a=sendrecv
+m=application 5308 UDP/BFCP *
+c=IN IP4 10.129.1.160
+a=floorctrl:c-s
+a=confid:1
+a=floorid:2 mstrm:12
+a=userid:1
+a=setup:actpass
+a=connection:new
+a=sendrecv
+m=application 31432 RTP/AVP 125
+c=IN IP4 10.129.1.160
+a=rtpmap:125 H224/4800
+a=rtcp:31433
+a=sendrecv
+m=application 53108 UDP/UDT/IX *
+c=IN IP4 10.129.1.160
+a=ixmap:11 xccp
+a=setup:actpass
+a=fingerprint:sha-256 3A:50:E7:C2:9E:AD:A1:D4:6F:75:C3:01:AE:6A:BC:B2:15:1F:51:F1:D9:DE:B1:43:4F:A4:21:03:56:B5:5F:E8
+a=sendrecv

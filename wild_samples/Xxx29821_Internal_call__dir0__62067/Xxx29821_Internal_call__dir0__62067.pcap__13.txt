@@ -1,0 +1,7 @@
+cc-request>
+--uniqueBoundary
+Content-Type: application/x-cisco-remotecc-cm+xml
+Content-Disposition: session;handling=required
+
+<CiscoIPPhoneEvent><EventItem Status="0" Data="0" GCID="6621575" URL="ECC:VideoResolutionEventLocal"/></CiscoIPPhoneEvent>
+--uniqueBoundary--

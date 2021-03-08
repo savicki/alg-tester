@@ -1,0 +1,11 @@
+To: <sip:7222116@msk1-cucm02.xxx.ru>;tag=38679501~b6e34e7e-43bb-4503-be2a-03590e8fe800-61952555
+Call-ID: 00090faa-00010004-000070a8-00002ab7@192.168.31.70
+Max-Forwards: 70
+Session-ID: 00003f1c00105000a00000090faa0001;remote=194e77f500105000a00000b8b32deb55
+Date: Fri, 05 Mar 2021 06:15:50 GMT
+CSeq: 102 BYE
+User-Agent: Cisco-CSF
+RTP-RxStat: Dur=10,Pkt=0,Oct=0,LostPkt=0,AvgJit=0,VqMetrics="CS=0;SCS=0"
+RTP-TxStat: Dur=10,Pkt=490,Oct=78400
+Content-Length: 0
+

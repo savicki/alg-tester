@@ -1,0 +1,13 @@
+NOTIFY sip:6758@msk1-cucm02.xxx.ru SIP/2.0
+Via: SIP/2.0/TCP 10.129.1.160:62067;branch=z9hG4bK00002836
+To: "Somebody Somewhere" <sip:6758@msk1-cucm02.xxx.ru>
+From: "Somebody Somewhere" <sip:6758@msk1-cucm02.xxx.ru>;tag=00090faa00010009000015e8-00005756
+Call-ID: 000008ed-00006d51@10.129.1.160
+Date: Fri, 05 Mar 2021 06:15:50 GMT
+CSeq: 2 NOTIFY
+Event: dialog
+Subscription-State: active
+Max-Forwards: 70
+Contact: <sip:49eca53c-df45-44db-aca8-0042bc69b269@10.129.1.160:62067;transport=tcp>;+u.sip!devicename.ccm.cisco.com="CSFMOSCHENKO"
+Allow: ACK,BYE,CANCEL,INVITE,NOTIFY,OPTIONS,REFER,REGISTER,UPDATE,SUBSCRIBE
+Content-Length: 362

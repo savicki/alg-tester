@@ -1,0 +1,41 @@
+act>
+</bulkregisterreq>
+</x-cisco-remotecc-request>
+
+--uniqueBoundary
+Content-Type: application/x-cisco-remotecc-request+xml
+Content-Disposition: session;handling=optional
+
+<?xml version="1.0" encoding="UTF-8"?>
+<x-cisco-remotecc-request>
+  <optionsind>
+    <combine max="6">
+      <remotecc>
+        <status></status>
+      </remotecc>
+      <service-control></service-control>
+    </combine>
+    <dialog usage="hook status">
+      <unot></unot>
+      <sub></sub>
+    </dialog>
+    <dialog usage="shared line">
+      <unot></unot>
+      <sub></sub>
+    </dialog>
+    <presence usage="blf speed dial">
+      <unot></unot>
+      <sub></sub>
+    </presence>
+    <joinreq></joinreq>
+    <cfwdall-anyline></cfwdall-anyline>
+    <coaching></coaching>
+    <oosalarm></oosalarm>
+    <x-cisco-number></x-cisco-number>
+    <bfcp></bfcp>
+    <ix></ix>
+    <gatewayrecording></gatewayrecording>
+    <conferenceDisplayInstance></conferenceDisplayInstance>
+  </optionsind>
+</x-cisco-remotecc-request>
+--uniqueBoundary--
