@@ -1,0 +1,38 @@
+BYE sip:service@172.16.2.1:5060 SIP/2.0
+Via: SIP/2.0/TCP 192.168.29.132:5060;branch=z9hG4bK-2044-10445-7
+From: sipp <sip:sipp@192.168.29.132:5060>;tag=2044SIPpTag0010445
+To: service <sip:service@172.16.2.1:5060>;tag=7479SIPpTag0110445
+Call-ID: 10445-2044@192.168.29.132
+CSeq: 2 BYE
+Contact: sip:sipp@192.168.29.132:5060
+Max-Forwards: 70
+Subject: Performance Test
+Content-Length: 0
+
+BYE sip:service@172.16.2.1:5060 SIP/2.0
+Via: SIP/2.0/TCP 192.168.29.132:5060;branch=z9hG4bK-2044-10446-7
+From: sipp <sip:sipp@192.168.29.132:5060>;tag=2044SIPpTag0010446
+To: service <sip:service@172.16.2.1:5060>;tag=7479SIPpTag0110446
+Call-ID: 10446-2044@192.168.29.132
+CSeq: 2 BYE
+Contact: sip:sipp@192.168.29.132:5060
+Max-Forwards: 70
+Subject: Performance Test
+Content-Length: 0
+
+BYE sip:service@172.16.2.1:5060 SIP/2.0
+Via: SIP/2.0/TCP 192.168.29.132:5060;branch=z9hG4bK-2044-10447-7
+From: sipp <sip:sipp@192.168.29.132:5060>;tag=2044SIPpTag0010447
+To: service <sip:service@172.16.2.1:5060>;tag=7479SIPpTag0110447
+Call-ID: 10447-2044@192.168.29.132
+CSeq: 2 BYE
+Contact: sip:sipp@192.168.29.132:5060
+Max-Forwards: 70
+Subject: Performance Test
+Content-Length: 0
+
+BYE sip:service@172.16.2.1:5060 SIP/2.0
+Via: SIP/2.0/TCP 192.168.29.132:5060;branch=z9hG4bK-2044-10448-7
+From: sipp <sip:sipp@192.168.29.132:5060>;tag=2044SIPpTag0010448
+To: service <sip:service@172.16.2.1:5060>;tag=7479SIPpTag0110448
+Call-ID: 10448-2044@192.168.29
