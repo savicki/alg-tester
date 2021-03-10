@@ -8,6 +8,7 @@ import sys
 import io
 from time import sleep
 
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -28,6 +29,7 @@ TCP_PORT = 5060
 
 RNRN = '\r\n\r\n'
 
+
 # search \r\n\r\n
 # search Content-Length
 # locate end of msg
@@ -42,12 +44,12 @@ def do_parse_msgs(content, args):
         if end > st:
             m = re.match(r"[\w\W]*?Content-Length:\W*(\d+)", content[st:end])
 
-            if m != None:
+            if m is not None:
                 content_len = int(m.group(1))
             else:
                 content_len = 0
 
-            end = end + len(RNRN)  + content_len
+            end = end + len(RNRN) + content_len
             ind = ind + 1
 
             print '[do_parse_msgs] %d-th original msg at [%s, %s) of %d bytes with Content-Length: %s' % (ind, st, end, end - st, content_len)
@@ -67,56 +69,59 @@ def do_parse_msgs(content, args):
 
     return msgs
 
+
 def do_edit_msg(msg, replace_arr, update_cl):
-     orig_len = len(msg)
+    orig_len = len(msg)
 
-     for r in replace_arr:
-          print((bcolors.OKRED + 'replace \'%s\' with \'%s\'' + bcolors.ENDC) % (r[0], r[1]))
-          msg = msg.replace(r[0], r[1])
+    for r in replace_arr:
+        print((bcolors.OKRED + 'replace \'%s\' with \'%s\'' + bcolors.ENDC) % (r[0], r[1]))
+        msg = msg.replace(r[0], r[1])
 
-     if update_cl: # @msg is single SIP message
-          end = msg.find(RNRN)
-          if end > 0:
-               end = end + len(RNRN)
-               content_len = len(msg) - end;
+    if update_cl:  # @msg is single SIP message
+        end = msg.find(RNRN)
+        if end > 0:
+            end = end + len(RNRN)
+            content_len = len(msg) - end
 
-               def replace_content_len(m):
-                    return m.group(1) + str(content_len)
+            def replace_content_len(m):
+                return m.group(1) + str(content_len)
 
-               msg = re.sub(r"(Content-Length:\W*)(\d+)", replace_content_len, msg)
+            msg = re.sub(r"(Content-Length:\W*)(\d+)", replace_content_len, msg)
 
-               print('Updated msg of %d => %d bytes with Content-Length: %s' % (orig_len, len(msg), content_len))
-               print((bcolors.OKMAGENTA + '\'%s\'' + bcolors.ENDC) % msg)
+            print('Updated msg of %d => %d bytes with Content-Length: %s' % (orig_len, len(msg), content_len))
+            print((bcolors.OKMAGENTA + '\'%s\'' + bcolors.ENDC) % msg)
 
-     return msg, len(msg)
+    return msg, len(msg)
+
 
 def do_update_content_length(submsg_arr):
-     msg = ""
-     for submsg in submsg_arr:
-          msg = msg + submsg
+    msg = ""
+    for submsg in submsg_arr:
+        msg = msg + submsg
 
-     # where Content-Length: found and fixed
-     submsg_ind = -1
+    # where Content-Length: found and fixed
+    submsg_ind = -1
 
-     end = msg.find(RNRN)
-     if end > 0:
-          end = end + len(RNRN)
-          content_len = len(msg) - end;
+    end = msg.find(RNRN)
+    if end > 0:
+        end = end + len(RNRN)
+        content_len = len(msg) - end
 
-          def replace_content_len(m):
-               print("new Content-Length: %d" % content_len)
-               return m.group(1) + str(content_len)
+        def replace_content_len(m):
+            print("new Content-Length: %d" % content_len)
+            return m.group(1) + str(content_len)
 
-          for ind, submsg in enumerate(submsg_arr):
-               if re.search(r"(Content-Length:\W*)(\d+)", submsg):
-                    submsg_ind = ind
-                    submsg_arr[ind] = re.sub(r"(Content-Length:\W*)(\d+)", replace_content_len, submsg)                    
+        for ind, submsg in enumerate(submsg_arr):
+            if re.search(r"(Content-Length:\W*)(\d+)", submsg):
+                submsg_ind = ind
+                submsg_arr[ind] = re.sub(r"(Content-Length:\W*)(\d+)", replace_content_len, submsg)
 
-     # msg_size = 0
-     # for submsg in submsg_arr:
-     #      msg_size = msg_size + len(submsg)
+    # msg_size = 0
+    # for submsg in submsg_arr:
+    #      msg_size = msg_size + len(submsg)
 
-     return submsg_arr, submsg_ind
+    return submsg_arr, submsg_ind
+
 
 # parse message(s), then
 # edit each of message(s)
@@ -125,19 +130,19 @@ def process_file(content, args, f_chunk_lens):
         msgs = do_parse_msgs(content, args)
     else:
         print((bcolors.OKMAGENTA + '\'%s\'' + bcolors.ENDC) % content)
-        msgs = [content];
+        msgs = [content]
 
     #   MSG |-----------|-----------|
-
+    #
     # chunk |-----------------------|
     # chunk |-------|---------------|
-    # chunk |--------------|--------|     
-
+    # chunk |--------------|--------|
+    #
     # chunk |----|------|-----------|
-
+    #
     # chunk |-------|------|--------|
     # submsg|-------*---*--*--------|
-
+    #
     # chunk |---|---|--------|------|
 
     sub_msgs = []
@@ -173,15 +178,15 @@ def process_file(content, args, f_chunk_lens):
             sub_msgs_info.append((msg_ind, chunk_ind))
 
             if chunk_off == 0:
-                chunk_ind = chunk_ind +1
+                chunk_ind = chunk_ind + 1
 
             st_off += end_off
-            #print("st_off: %s, chunk_off: %d" % (st_off, chunk_off))
+            # print("st_off: %s, chunk_off: %d" % (st_off, chunk_off))
 
         # skip off processed message
         st_off -= msg_len_copy
 
-    #print(sub_msgs_info)
+    # print(sub_msgs_info)
 
     for ind, submsg in enumerate(sub_msgs):
         submsg_len = len(submsg)
@@ -231,9 +236,10 @@ def process_file(content, args, f_chunk_lens):
 
     return chunks
 
+
 def str2bool(v):
     if isinstance(v, bool):
-       return v
+        return v
     if v.lower() in ('yes', 'true', 't', 'y', '1'):
         return True
     elif v.lower() in ('no', 'false', 'f', 'n', '0'):
@@ -268,7 +274,7 @@ if len(args.r) == 0:
 if args.r != '':
     for ind, arg in enumerate(args.r):
         m = re.match(r"([\w\W]+?)/([\w\W]+)", arg)
-        if m != None:
+        if m is not None:
             args.r[ind] = (m.group(1), m.group(2))
         else:
             print 'wrong replace argument \'%s\', it must match patter \'search_word/replace_word\'' % arg
@@ -276,6 +282,7 @@ if args.r != '':
 # print "args.fmask: '%s'" % args.fmask
 # print "-r:'%s'" % args.r
 # print "-parse_msg: '%s'" % args.parse_msg
+
 
 # 'Internal_call__dir0__62067/VipNet_Internal_call__dir0__62067.pcap__1.txt'
 def pcap2txtmsg_filename(key):
@@ -299,7 +306,7 @@ if len(filenames) == 0:
 
 
 if args.fskip:
-     print "skipped first %s files" % args.fskip
+    print "skipped first %s files" % args.fskip
 
 print((bcolors.OKYELLOW + "Parse messages: %s" + bcolors.ENDC) % (args.parse_msg))
 
@@ -317,7 +324,7 @@ f_chunk_lens = []
 f_index = 0
 
 if not args.parse_msg:
-    for filename in filenames:        
+    for filename in filenames:
         f = open(filename, mode='r')
         f_content = f.read()
         f.close()
@@ -336,7 +343,7 @@ else:
 
     f_index = 0
 
-    for filename in filenames:    
+    for filename in filenames:
         f = open(filename, mode='r')
         f_content = f.read()
         f.close()
@@ -352,22 +359,22 @@ else:
 total_sent_bytes = 0
 
 for ind, chunk in enumerate(chunks):
-     sent_bytes = s.send(chunk.encode('ascii'))
-     total_sent_bytes = total_sent_bytes + sent_bytes
+    sent_bytes = s.send(chunk.encode('ascii'))
+    total_sent_bytes = total_sent_bytes + sent_bytes
 
-     try:
-          s.settimeout(1.0)
-          recv_buffer = s.recv(4096)
-     except socket.timeout:
-          pass
+    try:
+        s.settimeout(1.0)
+        recv_buffer = s.recv(4096)
+    except socket.timeout:
+        pass
 
-     if args.delay:
-          sleep(args.delay)
+    if args.delay:
+        sleep(args.delay)
 
-     # e.g. "[2] 'tomsk_7.txt' read 460, write 482, sent 482 bytes"
-     print((bcolors.OKYELLOW + "[%s] read: %s, after replace: %s, sent: %s bytes" + bcolors.ENDC) % (ind, f_chunk_lens[ind], len(chunk), sent_bytes))
+    # e.g. "[2] 'tomsk_7.txt' read 460, write 482, sent 482 bytes"
+    print((bcolors.OKYELLOW + "[%s] read: %s, after replace: %s, sent: %s bytes" + bcolors.ENDC) % (ind, f_chunk_lens[ind], len(chunk), sent_bytes))
 
-     if args.fdump:
+    if args.fdump:
         print(("'" + bcolors.OKMAGENTA + "%s" + bcolors.ENDC + "'") % (chunk))
 
 print "File limit %d reached, stop. Total sent bytes: %s" % (len(filenames), total_sent_bytes)
