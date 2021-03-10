@@ -63,7 +63,7 @@ while i < len(data):
 
   pcap_pkt_body_index = pcap_pkt_body_index+14
 
-  ip_hdr = unpack('BBHHHBBHLL', data[pcap_pkt_body_index:pcap_pkt_body_index+20])
+  ip_hdr = unpack('=BBHHHBBHLL', data[pcap_pkt_body_index:pcap_pkt_body_index+20])
   ihl = ip_hdr[0] & 0x0F
   trans_proto = ip_hdr[6]
   ip_src = ip_hdr[8]
