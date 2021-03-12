@@ -142,18 +142,17 @@ int main( int argc, char *argv[] )
                          printf("recv %d bytes: '" ANSI_COLOR_GREEN "%s" ANSI_COLOR_RESET "' \n", read_bytes, buffer);
 
                          total_read_bytes += read_bytes;
-                    }
 
-                    if (!no_reply) {
-                         write_bytes = send(newsockfd, buffer, read_bytes, 0);
+                         if (!no_reply) {
+                              write_bytes = send(newsockfd, buffer, read_bytes, 0);
 
-                         printf("send back %d bytes \n", write_bytes);
+                              printf("send back %d bytes \n", write_bytes);
 
-                         if (write_bytes > 0) {
-                              total_write_bytes += write_bytes;
+                              if (write_bytes > 0) {
+                                   total_write_bytes += write_bytes;
+                              }
                          }
                     }
-               
                } 
                while(read_bytes);
           }
