@@ -83,13 +83,7 @@ int main( int argc, char *argv[] )
           goto exit;
      }
 
-     if (saddr.sin_addr.s_addr) {
-          printf("IP addr to listen on: %s \n", inet_ntoa(saddr.sin_addr));
-     }
-     else {
-          printf("missed '-ip' argument, valid example '-ip 127.0.0.1'. Exit\n");
-          goto exit;
-     }
+     printf("IP addr to listen on: %s \n", inet_ntoa(saddr.sin_addr));
 
      printf("no reply mode: %s \n", (no_reply) ? "ON" : "OFF");
 
