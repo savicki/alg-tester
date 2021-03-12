@@ -25,7 +25,13 @@
 int main( int argc, char *argv[] )
 {
      int res, i;
-     int no_reply = 0, local_port = 0;     
+     int no_reply = 0;
+
+     struct sockaddr_in  saddr;
+
+     memset((void*) &saddr, 0, sizeof(saddr));
+     saddr.sin_family = AF_INET;
+     saddr.sin_addr.s_addr = /*0L*/ INADDR_ANY;
 
 
      for(i = 1; i < argc; i++) {
@@ -41,10 +47,25 @@ int main( int argc, char *argv[] )
                     goto exit;
                }
 
-               local_port = atoi(argv[i+1]);
+               saddr.sin_port = atoi(argv[i+1]);
 
-               if (local_port <= 0) {
+               if (saddr.sin_port <= 0) {
                     printf("invalid '-port' value '%s', valid example '-port 5060'. Exit\n", argv[i+1]);
+                    goto exit;
+               }
+
+               saddr.sin_port = htons(saddr.sin_port);
+
+               i++;
+          }
+          else if (strcasecmp(name, "-ip") == 0) {
+               if (i + 1 == argc) {
+                    printf("invalid '-ip' argument, IP address missed, valid example '-ip 127.0.0.1'. Exit\n");
+                    goto exit;
+               }
+
+               if (inet_aton(argv[i+1], &saddr.sin_addr) == 0) {
+                    printf("invalid '-ip' value '%s', valid example '-ip 127.0.0.1'. Exit\n", argv[i+1]);
                     goto exit;
                }
 
@@ -54,11 +75,19 @@ int main( int argc, char *argv[] )
           //printf("Exit: argv [%d of %d] : '%s' \n", i, argc, argv[i]);
      }
 
-     if (local_port) {
-          printf("TCP port to listen on: %d \n", local_port);
+     if (saddr.sin_port) {
+          printf("TCP port to listen on: %d \n", ntohs(saddr.sin_port));
      }
      else {
           printf("missed '-port' argument, valid example '-port 5060'. Exit\n");
+          goto exit;
+     }
+
+     if (saddr.sin_addr.s_addr) {
+          printf("IP addr to listen on: %s \n", inet_ntoa(saddr.sin_addr));
+     }
+     else {
+          printf("missed '-ip' argument, valid example '-ip 127.0.0.1'. Exit\n");
           goto exit;
      }
 
@@ -71,22 +100,11 @@ int main( int argc, char *argv[] )
           goto exit;
      }
 
-     {
-          int localPort = 5060; /* local port */
+     res = bind(sockfd, (const struct sockaddr* ) &saddr, sizeof(saddr));
 
-          struct sockaddr_in  saddr;
-          memset((void*) &saddr, 0, sizeof(saddr));
-
-          saddr.sin_family = AF_INET;
-          saddr.sin_addr.s_addr = /*0L*/INADDR_ANY;
-          saddr.sin_port = htons( localPort );
-
-          res = bind(sockfd, (const struct sockaddr* ) &saddr, sizeof(saddr));
-
-          if (res < 0) {
-               printf( "bindind failed, errno: %d. Exit\n", errno );
-               goto exit;
-          }
+     if (res < 0) {
+          printf( "bindind failed, errno: %d. Exit\n", errno );
+          goto exit;
      }
 
      struct sockaddr_in cli_addr;
@@ -95,7 +113,7 @@ int main( int argc, char *argv[] )
 
      listen(sockfd, 2);
 
-     printf("Listening on port %d ...\n", local_port);
+     printf("Listening on port %d ...\n", ntohs(saddr.sin_port));
 
      do
      {
