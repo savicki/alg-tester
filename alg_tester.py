@@ -132,6 +132,8 @@ def process_file(content, args, f_chunk_lens):
         print((bcolors.OKMAGENTA + '\'%s\'' + bcolors.ENDC) % content)
         msgs = [content]
 
+    print("found and parsed %s complete SIP messages" % len(msgs))
+
     #   MSG |-----------|-----------|
     #
     # chunk |-----------------------|
