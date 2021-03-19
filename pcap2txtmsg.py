@@ -80,7 +80,9 @@ while i < len(data):
   tcp_hdr = unpack('>HHLLHHHH', data[pcap_pkt_body_index:pcap_pkt_body_index+20])
   tcp_hdr_len = (tcp_hdr[4] >> 12) * 4
 
-  print('0x%x:%d => 0x%x:%d, iph_total: %s' % (ip_src, tcp_hdr[0], ip_dst, tcp_hdr[1], ip_hdr_total_len))
+  tcp_payload_len = ip_hdr_total_len - ihl * 4 - tcp_hdr_len
+
+  print('0x%x:%d => 0x%x:%d, iph_total: %s, tcp_payload_len: %s' % (ip_src, tcp_hdr[0], ip_dst, tcp_hdr[1], ip_hdr_total_len, tcp_payload_len))
 
   pcap_pkt_body_index = pcap_pkt_body_index + tcp_hdr_len
 
@@ -89,9 +91,9 @@ while i < len(data):
   # next pcap packet
   i = i + 16 + pcap_pkt_hdr[2]
 
+  if tcp_payload_len > 0:
+    f = open(os.path.join(directory, '%s__%s.txt' % (args.fname, file_num)), 'w')
+    f.write(data[pcap_pkt_body_index:pcap_pkt_body_end])
+    f.close()
 
-  f = open(os.path.join(directory, '%s__%s.txt' % (args.fname, file_num)), 'w')
-  f.write(data[pcap_pkt_body_index:pcap_pkt_body_end])
-  f.close()
-
-  file_num = file_num + 1
+    file_num = file_num + 1
