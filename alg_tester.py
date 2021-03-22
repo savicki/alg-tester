@@ -202,20 +202,20 @@ def process_file(content, args, f_chunk_lens):
     sub_msgs.append('')
     sub_msgs_info.append((sub_msgs_info[-1][0] + 1, sub_msgs_info[-1][1] + 1))
 
-    # for each message, locate and update "Content-Length:" in submessage
+    # Locate submessages which forms another message, 
+    # and update "Content-Length:" header in submessage where this header located
     cur_msg_ind = -1
-    st_ind = -1
+    st_ind = 0
     for ind, submsg in enumerate(sub_msgs):
         msg_ind = sub_msgs_info[ind][0]
         if msg_ind > cur_msg_ind:
-            if st_ind >= 0:
-                print("msg_ind: [%d] at [%d, %d) sub_msgs arr" % (cur_msg_ind, st_ind, ind))
-                sub_msgs_arr, submsg_ind = do_update_content_length(sub_msgs[st_ind:ind])
-                if submsg_ind >= 0:
-                    sub_msgs[st_ind + submsg_ind] = sub_msgs_arr[submsg_ind]
+            print("msg_ind: [%d] at [%d, %d) sub_msgs arr" % (cur_msg_ind, st_ind, ind))
+            sub_msgs_arr, submsg_ind = do_update_content_length(sub_msgs[st_ind:ind])
+            if submsg_ind >= 0:
+                sub_msgs[st_ind + submsg_ind] = sub_msgs_arr[submsg_ind]
 
-                cur_msg_ind = msg_ind
-                st_ind = ind
+            cur_msg_ind = msg_ind
+            st_ind = ind
 
     chunks = []
     chunk_content = ""
