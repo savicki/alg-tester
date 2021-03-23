@@ -33,6 +33,7 @@ int main( int argc, char *argv[] )
      saddr.sin_family = AF_INET;
      saddr.sin_addr.s_addr = /*0L*/ INADDR_ANY;
 
+     setbuf(stdout, NULL);
 
      for(i = 1; i < argc; i++) {
           //printf("argv [%d of %d] : '%s' \n", i, argc, argv[i]);
