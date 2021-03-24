@@ -256,6 +256,7 @@ parser.add_argument("-dst_port", help="destin port", type=int, default=TCP_PORT)
 parser.add_argument("-fskip", help="num of filenames to skip", type=int, default=0)
 parser.add_argument("-fcount", help="limit of filenames", type=int, required=False, default=0)
 parser.add_argument("-delay", help="delay in seconds between files, float value", type=float, required=True)
+parser.add_argument("-recv_delay", help="delay in seconds before next socket receive, float value", type=float, required=False, default=0.5)
 parser.add_argument("-fmask", help="mask of filename", type=str, required=True)
 parser.add_argument("-fdump", help="dump each file during processing", type=str2bool, default=False)
 parser.add_argument("-r", help="replace pattern, e.g. '-r search/replace search2/replace2'", type=str, nargs="+", default='')
@@ -366,7 +367,7 @@ for ind, chunk in enumerate(chunks):
     total_sent_bytes = total_sent_bytes + sent_bytes
     recv_bytes = 0
     try:
-        s.settimeout(2.0)
+        s.settimeout(args.recv_delay)
         recv_buffer = s.recv(4096)
         recv_bytes = len(recv_buffer)
 
