@@ -367,12 +367,19 @@ for ind, chunk in enumerate(chunks):
     sent_bytes = s.send(chunk.encode('ascii'))
     total_sent_bytes = total_sent_bytes + sent_bytes
     recv_bytes = 0
+    recv_buffers =[]
     try:
-        s.settimeout(args.recv_delay)
-        recv_buffer = s.recv(4096)
-        recv_bytes = len(recv_buffer)
+        while True:
+            s.settimeout(args.recv_delay)
+            recv_buffer = s.recv(4096)
 
-        total_recv_bytes = total_recv_bytes + recv_bytes
+            recv_bytes = len(recv_buffer)
+
+            if recv_bytes > 0:
+                recv_buffers.append(recv_buffer)
+
+            total_recv_bytes = total_recv_bytes + recv_bytes
+
     except socket.timeout:
         pass
 
@@ -385,7 +392,8 @@ for ind, chunk in enumerate(chunks):
     if args.fdump:
         print(("'" + bcolors.OKMAGENTA + "%s" + bcolors.ENDC + "'") % (chunk))
         if recv_bytes > 0:
-            print(("'" + bcolors.OKRED + "%s" + bcolors.ENDC + "'") % (recv_buffer))
+            for recv_buffer in recv_buffers:
+                print(("'" + bcolors.OKRED + "%s" + bcolors.ENDC + "'") % (recv_buffer))
 
 print "File limit %d reached, stop. Total sent bytes: %s, total recv bytes: %s" % (len(filenames), total_sent_bytes, total_recv_bytes)
 
