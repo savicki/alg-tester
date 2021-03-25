@@ -104,6 +104,7 @@ int main( int argc, char *argv[] )
 
      struct sockaddr_in cli_addr;
      int newsockfd;
+     int result;
 
 
      listen(sockfd, 2);
@@ -114,10 +115,19 @@ int main( int argc, char *argv[] )
      {
           int total_read_bytes = 0, total_write_bytes = 0;
 
+          int yes = 1;
           int clilen = sizeof(cli_addr);
           newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen);
           if (newsockfd < 0) {
                printf( "accept failed, errno: %d. Exit\n", errno);
+               goto exit;
+          }
+
+          result = setsockopt(newsockfd, IPPROTO_TCP, TCP_NODELAY, (char *) &yes, sizeof(int));
+          if (result < 0) {
+               printf( "TCP_NODELAY failed to set, errno: %d. Exit\n", errno);
+
+               close(newsockfd);
                goto exit;
           }
 
