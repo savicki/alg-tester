@@ -1,0 +1,8 @@
+:slides
+a=inactive
+m=application 0 UDP/BFCP *
+c=IN IP4 0.0.0.0
+m=application 0 RTP/AVP 96
+a=rtpmap:96 H224/0
+a=inactive
+m=application 0 UDP/UDT/IX *

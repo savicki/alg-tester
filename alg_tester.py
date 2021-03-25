@@ -8,6 +8,7 @@ import sys
 import io
 from time import sleep
 
+# iTODO: highlight IPs in output
 
 class bcolors:
     HEADER = '\033[95m'
