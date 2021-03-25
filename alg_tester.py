@@ -392,8 +392,7 @@ for ind, chunk in enumerate(chunks):
     if args.fdump:
         print(("'" + bcolors.OKMAGENTA + "%s" + bcolors.ENDC + "'") % (chunk))
         if recv_bytes > 0:
-            for recv_buffer in recv_buffers:
-                print(("'" + bcolors.OKRED + "%s" + bcolors.ENDC + "'") % (recv_buffer))
+            print(("'" + bcolors.OKRED + "%s" + bcolors.ENDC + "'") % ("".join(recv_buffers)))
 
 print "File limit %d reached, stop. Total sent bytes: %s, total recv bytes: %s" % (len(filenames), total_sent_bytes, total_recv_bytes)
 
