@@ -10,7 +10,7 @@ Allow-Events: presence
 Call-Info: <urn:x-cisco-remotecc:callinfo>; security= Unknown; orientation= to; gci= 3-6780560; isVoip; call-instance= 1
 Send-Info: conference, x-cisco-conference
 Remote-Party-ID: <sip:8xxxxxxxxx3@[local_ip]>;party=called;screen=yes;privacy=off
-Contact: <sip:89104922813@[local_ip]:5060;transport=tcp>
+Contact: <sip:8xxxxxxxxx3@[local_ip]:5060;transport=tcp>
 Content-Type: application/sdp
 Content-Length: 685
 
