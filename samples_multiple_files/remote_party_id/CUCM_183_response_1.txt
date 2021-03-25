@@ -1,7 +1,7 @@
 SIP/2.0 183 Session Progress
 Via: SIP/2.0/TCP [remote_ip]:49627;branch=z9hG4bK000021a5;received=[remote_ip]
-From: "x y" <sip:6758@msk1-cucm02.interrao.ru>;tag=3863bb99df9a007e000052dd-00002416
-To: <sip:8xxxxxxxxx3@msk1-cucm02.interrao.ru>;tag=49607033~b6e34e7e-43bb-4503-be2a-03590e8fe800-62377354
+From: "x y" <sip:6758@domain.com>;tag=3863bb99df9a007e000052dd-00002416
+To: <sip:8xxxxxxxxx3@domain.com>;tag=49607033~b6e34e7e-43bb-4503-be2a-03590e8fe800-62377354
 Date: Wed, 24 Mar 2021 11:19:38 GMT
 Call-ID: 3863bb99-df9a0009-000009a4-000042c1@[remote_ip]
 CSeq: 101 INVITE

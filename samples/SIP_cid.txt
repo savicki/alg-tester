@@ -1,0 +1,18 @@
+REFER sip:49eca53c-df45-44db-aca8-0042bc69b269@[local_ip]:63945;transport=tcp SIP/2.0
+Via: SIP/2.0/TCP [remote_ip]:5060;branch=z9hG4bK91bc2c7c492c10
+From: <sip:6758@[remote_ip]>;tag=1626945701
+To: <sip:6758@[local_ip]>
+Call-ID: 22e18680-1ec19b7f-7a1d81-b54d840a@[remote_ip]
+CSeq: 101 REFER
+Max-Forwards: 70
+Contact: <sip:6758@[remote_ip]:5060;transport=tcp>
+User-Agent: Cisco-CUCM12.5
+Require: norefersub
+Expires: 0
+Refer-To: cid:1234567890@[remote_ip]
+Content-Id: <1234567890@[remote_ip]>
+Content-Type: multipart/mixed;boundary=uniqueBoundary
+Mime-Version: 1.0
+Referred-By: <sip:6758@[remote_ip]>
+Content-Length: 0
+

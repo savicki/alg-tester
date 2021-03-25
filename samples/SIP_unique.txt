@@ -1,13 +1,13 @@
 niqueBoundary--SIP/2.0 200 OK
-Via: SIP/2.0/TCP 10.129.1.160:63945;branch=z9hG4bK00001ea9
-From: <sip:6758@msk1-cucm02.interrao.ru>;tag=00090faa0001000200003ab3-000070a3
-To: <sip:6758@msk1-cucm02.interrao.ru>;tag=172272813
+Via: SIP/2.0/TCP [local_ip]:63945;branch=z9hG4bK00001ea9
+From: <sip:6758@domain.com>;tag=00090faa0001000200003ab3-000070a3
+To: <sip:6758@domain.com>;tag=172272813
 Date: Fri, 05 Mar 2021 06:29:30 GMT
-Call-ID: 00090faa-00010003-00006b7c-0000438c@10.129.1.160
+Call-ID: 00090faa-00010003-00006b7c-0000438c@[local_ip]
 Server: Cisco-CUCM12.5
 CSeq: 101 REGISTER
 Expires: 120
-Contact: <sip:49eca53c-df45-44db-aca8-0042bc69b269@10.129.1.160:63945;transport=tcp>;+sip.instance="<urn:uuid:00000000-0000-0000-0000-00090faa0001>";+u.sip!devicename.ccm.cisco.com="CSFMOSCHENKO";+u.sip!model.ccm.cisco.com="503";video;x-cisco-newreg
+Contact: <sip:49eca53c-df45-44db-aca8-0042bc69b269@[local_ip]:63945;transport=tcp>;+sip.instance="<urn:uuid:00000000-0000-0000-0000-00090faa0001>";+u.sip!devicename.ccm.cisco.com="";+u.sip!model.ccm.cisco.com="503";video;x-cisco-newreg
 Supported: X-cisco-srtp-fallback,X-cisco-sis-9.2.0
 Content-Type: application/x-cisco-remotecc-response+xml
 Content-Length: 381
