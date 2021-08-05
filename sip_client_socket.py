@@ -1,30 +1,48 @@
 #!/usr/bin/env python
 
 import socket
+import re
+import argparse
 
-TCP_IP = '172.16.2.3'
+REMOTE_IP = '172.16.1.11'
 TCP_PORT = 5060
 BUFFER_SIZE = 1024
-MESSAGE = """INVITE sip:uac@172.16.2.1:5060 SIP/2.0\r
-Via: SIP/2.0/tcp 172.16.0.4:59825;branch=z9hG4bK-16003-1-0\r
-From: sipp <sip:sipp@11.0.0.3:59825>;tag=16003SIPpTag001\r
-To: uac <sip:uac@172.16.2.1:5060>\r
-Call-ID: 1-16003@11.0.0.3\r
-CSeq: 1 INVITE\r
-Contact: sip:sipp@11.0.0.3:59825\r
-Max-Forwards: 70\r
-Subject: Performance Test\r
-Content-Type: application/sdp\r
+MESSAGE = """REGISTER sip:{{@local_ip}} SIP/2.0\r
+CSeq: 4 REGISTER\r
+Via: SIP/2.0/UDP {{@remote_ip}}:5060;branch=z9hG4bKde98b019-6e0f-ea11-829f-000c29f2ba09;rport\r
+User-Agent: sipcmd/1.0.1\r
+Authorization: Digest username="104", realm="asterisk", nonce="2ea44459", algorithm=MD5, response="769ce70baab0460cb24e841547ef6e0f"\r
+From: <sip:104@{{@local_ip}}>;tag=6077af19-6e0f-ea11-829f-000c29f2ba09\r
+Call-ID: b473af19-6e0f-ea11-829f-000c29f2ba09@hwServer\r
+Organization: Command line VoIP testphone\r
+To: <sip:104@{{@local_ip}}>\r
+Contact: <sip:104@{{@remote_ip}}:5060>\r
+Allow: INVITE,ACK,OPTIONS,BYE,CANCEL,SUBSCRIBE,NOTIFY,REFER,MESSAGE,INFO,PING,PRACK\r
+Expires: 0\r
 Content-Length: 0\r
-Refer-To: <sip:refertarget@11.0.0.3>\r
-Referred-By: <sip:referrer@11.0.0.3:59825>\r
-Record-Route: <sip:11.0.0.3;lr>\r
-Route: <sip:11.0.0.3;lr>\r
+Max-Forwards: 70\r
 \r
 """
 
+parser = argparse.ArgumentParser()
+parser.add_argument("-dst_ip", help="destin IP", type=str, required=True)
+
+args = parser.parse_args()
+
+
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((TCP_IP, TCP_PORT))
+
+print('Connecting to %s:%s ...' % (args.dst_ip, TCP_PORT))
+
+s.connect((args.dst_ip, TCP_PORT))
+
+LOCAL_IP = s.getsockname()[0]
+
+print('Connected. Local IP: %s' % LOCAL_IP)
+
+MESSAGE = re.sub("{{@local_ip}}", LOCAL_IP, MESSAGE)
+MESSAGE = re.sub("{{@remote_ip}}", REMOTE_IP, MESSAGE)
+
 s.send(MESSAGE.encode())
 data = s.recv(BUFFER_SIZE)
 s.close()
