@@ -4,7 +4,7 @@ import socket
 import re
 import argparse
 
-REMOTE_IP = '172.16.1.11'
+REMOTE_IP = ''
 TCP_PORT = 5060
 BUFFER_SIZE = 1024
 MESSAGE = """REGISTER sip:{{@local_ip}} SIP/2.0\r
@@ -36,6 +36,7 @@ print('Connecting to %s:%s ...' % (args.dst_ip, TCP_PORT))
 
 s.connect((args.dst_ip, TCP_PORT))
 
+REMOTE_IP = args.dst_ip
 LOCAL_IP = s.getsockname()[0]
 
 print('Connected. Local IP: %s' % LOCAL_IP)
